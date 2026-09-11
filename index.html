@@ -346,6 +346,15 @@
     for (const seg of segments) {
       if (uuidRe.test(seg)) return seg;
     }
+    // Check for segment after 'orders/track' or 'track'
+    const trackIdx = segments.lastIndexOf('track');
+    if (trackIdx !== -1 && trackIdx + 1 < segments.length) {
+      return segments[trackIdx + 1];
+    }
+    // Check for single path segment (not index.html or 404.html)
+    if (segments.length === 1 && !['index.html', '404.html'].includes(segments[0].toLowerCase())) {
+      return segments[0];
+    }
     // Fallback: query param ?token=
     const params = new URLSearchParams(window.location.search);
     return params.get('token') || '';
