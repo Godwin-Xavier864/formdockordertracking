@@ -525,7 +525,7 @@
         </div>`
       : (status !== 'cancelled' ? `<div class="awaiting-box">⏳ Your order is being prepared for dispatch. Tracking details will appear here once assigned.</div>` : '');
 
-    const canCancel = (data.can_cancel !== false) && (status !== 'delivery' && status !== 'completed' && status !== 'cancelled');
+    const canCancel = (data.can_cancel !== false) && (status === 'pending');
     const canConfirmReceive = Boolean(data.can_confirm_receive);
 
     const cancelBtnHTML = canCancel
